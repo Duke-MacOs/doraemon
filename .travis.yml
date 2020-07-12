@@ -21,7 +21,7 @@ deploy:
       branch: master
     tag: latest
   - provider: pages
-    cleanup: true
+    cleanup: false
     github_token: "$GITHUB_TOKEN"
     keep_history: true
     on:
