@@ -8,4 +8,11 @@ export default {
     type: 'babel',
     lazy: true,
   },
+  extraBabelPlugins: [
+    ['babel-plugin-import', {
+      libraryName: 'lodash',
+      libraryDirectory: '',
+      'camel2DashComponentName': false,
+    }],
+  ],
 };

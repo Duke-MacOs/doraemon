@@ -1,18 +1,18 @@
+
+import * as _ from 'lodash';
+
 import { IObject } from './global';
-import { isObject, isString, isUndefined, isNull } from './typeChecker';
 
 /** 向url字符串追加参数 */
 export function addQueryToUrl(query:IObject, url?:string):string {
   if (url) {
-    if (!isString(url)) {
-      console.warn('url is not a string');
+    if (!_.isString(url)) {
       return '';
     }
   } else {
     url = '';
   }
-  if (!query || !isObject(query)) {
-    console.warn('`query` is not an object!');
+  if (!query || !_.isPlainObject(query)) {
     return url;
   }
   const startIndex = url.indexOf('?');
@@ -26,9 +26,8 @@ export function addQueryToUrl(query:IObject, url?:string):string {
   } else if (startIndex !== lastIndex && url.lastIndexOf('&') !== lastIndex) {
     url += '&';
   }
-  for (const key in query) {
-    const value = query[key];
-    if (!isUndefined(value) && !isNull(value)) {
+  for (const [key, value] of Object.entries(query)) {
+    if (!_.isUndefined(value) && !_.isNull(value)) {
       url += `${key}=${query[key]}&`;
     }
   }
